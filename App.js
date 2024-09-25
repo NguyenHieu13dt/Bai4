@@ -1,116 +1,80 @@
-import React from 'react';
-import { FlatList, View, Text, StyleSheet } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons'; // Import the icon library
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-const DATA = [
-  {
-    id: '1',
-    title: 'Bước 1 Xác định nhu cầu khách hàng',
-    description: 'Nguyen Minh Hieu sắp đến hạn lúc 01/08/2020 9:00',
-    date: '20/08/2020, 06:00',
-  },
-  {
-    id: '2',
-    title: 'Bạn có khách hàng mới!',
-    description: 'Chúc mừng bạn, bạn có khách hàng mới. Hãy mau chóng liên lạc ngay.',
-    date: '20/08/2020, 06:00',
-  },
-  {
-    id: '3',
-    title: 'Khách hàng được chia sẻ bị trùng',
-    description: 'Rất tiếc, khách hàng được chia sẻ đã tồn tại trên hệ thống. Vui lòng chia sẻ khách hàng.',
-    date: '20/08/2020, 06:00',
-  },
-  {
-    id: '4',
-    title: 'Khách hàng được thêm bị trùng',
-    description: 'Rất tiếc, khách hàng được thêm đã tồn tại trên hệ thống. Vui lòng thêm khách hàng.',
-    date: '20/08/2020, 06:00',
-  },
-  {
-    id: '5',
-    title: 'Công việc sắp đến hạn trong hôm nay',
-    description: 'Bạn có 17 công việc sắp đến hạn trong hôm nay.',
-    date: '20/08/2020, 06:00',
-  },
-  {
-    id: '6',
-    title: 'Công việc đã quá hạn',
-    description: 'Bạn có 17 công việc bị quá hạn. Hãy kiểm tra lại kế hoạch hoàn thành công việc.',
-    date: '20/08/2020, 06:00',
-  },
-];
+const ColorChanger = () => {
+  // State to store the background color
+  const [backgroundColor, setBackgroundColor] = useState('green');
 
-const NotificationItem = ({ title, description, date, id }) => {
-  // Determine the icon based on the id
-  const iconName = ['2', '3', '4'].includes(id) ? 'person' : 'check-circle';
+  // Function to change background color based on button pressed
+  const changeBackgroundColor = (color) => {
+    setBackgroundColor(color);
+  };
 
   return (
-    <View style={styles.item}>
-      <Icon name={iconName} size={24} color="#000" style={styles.icon} />
-      <View style={styles.textContainer}>
-        <Text style={styles.title}>{title}</Text>
-        <Text>{description}</Text>
-        <Text style={styles.date}>{date}</Text>
-      </View>
+    <View style={[styles.container, { backgroundColor }]}>
+      <TouchableOpacity
+        style={[styles.button, { backgroundColor: 'green' }]}
+        onPress={() => changeBackgroundColor('green')}
+        
+      >
+        <Text style={styles.buttonText}>GREEN</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={[styles.button, { backgroundColor: 'blue' }]}
+        onPress={() => changeBackgroundColor('blue')}
+      >
+        <Text style={styles.buttonText}>BLUE</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={[styles.button, { backgroundColor: 'brown' }]}
+        onPress={() => changeBackgroundColor('brown')}
+      >
+        <Text style={styles.buttonText}>BROWN</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={[styles.button, { backgroundColor: 'yellow' }]}
+        onPress={() => changeBackgroundColor('yellow')}
+      >
+        <Text style={styles.buttonText}>YELLOW</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={[styles.button, { backgroundColor: 'red' }]}
+        onPress={() => changeBackgroundColor('red')}
+      >
+        <Text style={styles.buttonText}>RED</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={[styles.button, { backgroundColor: 'black' }]}
+        onPress={() => changeBackgroundColor('black')}
+      >
+        <Text style={styles.buttonText}>BLACK</Text>
+      </TouchableOpacity>
     </View>
   );
 };
 
-const App = () => {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.header}>Thông báo</Text>
-      <FlatList
-        data={DATA}
-        renderItem={({ item }) => (
-          <NotificationItem
-            title={item.title}
-            description={item.description}
-            date={item.date}
-            id={item.id} // Pass the id to NotificationItem
-          />
-        )}
-        keyExtractor={item => item.id}
-      />
-    </View>
-  );
-};
-
+// Styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 20,
-    backgroundColor: '#fff',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  header: {
-    fontSize: 24,
+  button: {
+    width: 300,
+    height: 50,
+    margin: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: 'white',
     fontWeight: 'bold',
-    textAlign: 'center',
-    marginBottom: 20,
-  },
-  item: {
-    flexDirection: 'row', // Align items in a row
-    backgroundColor: '#CCFFCC',
-    padding: 20,
-    marginVertical: 8,
-    marginHorizontal: 16,
-    borderRadius: 10,
-    alignItems: 'center', // Center items vertically
-  },
-  icon: {
-    marginRight: 10, // Space between icon and text
-  },textContainer: {
-    flex: 1, // Allow text to take remaining space
-  },
-  title: {
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  date: {
-    fontSize: 12,
-    color: 'gray',
   },
 });
 
-export default App;
+export default ColorChanger;
